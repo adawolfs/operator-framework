@@ -28,14 +28,25 @@ type SpeakerSpec struct {
 	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
 
-	// Foo is an example field of Speaker. Edit Speaker_types.go to remove/update
-	Foo string `json:"foo,omitempty"`
+	// NOTE Custom spec fields
+
+	// Speaker First name
+	FirstName string `json:"firstName,omitempty"`
+	// Speaker Last name
+	LastName string `json:"lastName,omitempty"`
+	// Speaker Avatar url
+	Avatar string `json:"avatar,omitempty"`
 }
 
 // SpeakerStatus defines the observed state of Speaker
 type SpeakerStatus struct {
 	// INSERT ADDITIONAL STATUS FIELD - define observed state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
+
+	// NOTE Custom status fields
+
+	// Number of sessions made by the speaker
+	Sessions string `json:"sessions,omitempty"`
 }
 
 // +kubebuilder:object:root=true
