@@ -1,0 +1,24 @@
+# permissions for end users to edit speakers.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: speaker-editor-role
+rules:
+- apiGroups:
+  - hora.de.k8s.adawolfs.github.io
+  resources:
+  - speakers
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - hora.de.k8s.adawolfs.github.io
+  resources:
+  - speakers/status
+  verbs:
+  - get

@@ -1,0 +1,20 @@
+# permissions for end users to view speakers.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: speaker-viewer-role
+rules:
+- apiGroups:
+  - hora.de.k8s.adawolfs.github.io
+  resources:
+  - speakers
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - hora.de.k8s.adawolfs.github.io
+  resources:
+  - speakers/status
+  verbs:
+  - get

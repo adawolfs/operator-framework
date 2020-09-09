@@ -1,0 +1,7 @@
+apiVersion: hora.de.k8s.adawolfs.github.io/v1
+kind: Speaker
+metadata:
+  name: speaker-sample
+spec:
+  # Add fields here
+  foo: bar
