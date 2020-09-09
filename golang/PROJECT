@@ -1,0 +1,7 @@
+domain: adawolfs.github.io
+layout: go.kubebuilder.io/v2
+projectName: golang
+repo: github.com/adawolfs/operator-framework/golang
+version: 3-alpha
+plugins:
+  go.sdk.operatorframework.io/v2-alpha: {}
