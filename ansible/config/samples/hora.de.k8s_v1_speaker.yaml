@@ -1,0 +1,9 @@
+apiVersion: hora.de.k8s.adawolfs.github.io/v1
+kind: Speaker
+metadata:
+  name: speaker-sample
+spec:
+  firstname: Alvin
+  lastname: Estrada
+  avatar: https://avatars3.githubusercontent.com/u/7836423
+  

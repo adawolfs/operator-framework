@@ -1,0 +1,8 @@
+domain: adawolfs.github.io
+layout: ansible.sdk.operatorframework.io/v1
+projectName: ansible
+resources:
+- group: hora.de.k8s
+  kind: Speaker
+  version: v1
+version: 3-alpha

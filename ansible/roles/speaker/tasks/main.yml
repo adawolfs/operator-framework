@@ -1,0 +1,52 @@
+---
+- name: Create configmap
+  k8s:
+    state: present
+    definition:
+      apiVersion: v1  # Esta es la version del api a la cual pertenece el ConfigMap
+      kind: ConfigMap # Este es el tipo de nuestro archivo
+      metadata: # Definicion de la metadata de nuestro objeto
+        name: "{{ ansible_operator_meta.name }}"
+        namespace: "{{ ansible_operator_meta.namespace }}"
+      labels:
+        name: nginx
+      data: # Aqui se especifica la data que contentra el Config Map
+        index.html: |
+          <html>
+
+          <head></head>
+
+          <body>
+            <div style="align-content: center;text-align: center;">
+              <h1>Ansible</h1>
+              <img src="{{avatar}}" alt="avatar" style="border-radius: 50%;">
+              <h1>{{ firstname }} {{ lastname }}</h1>
+            </div>
+          </body>
+
+          </html>
+
+
+- name: Create Pod
+  k8s:
+    state: present
+    definition:
+      apiVersion: v1 
+      kind: Pod 
+      metadata: 
+        name: "{{ ansible_operator_meta.name }}"
+        namespace: "{{ ansible_operator_meta.namespace }}"
+      spec: 
+        containers: 
+        - name: nginx 
+          image: nginx 
+          ports: 
+            - containerPort: 80 
+          volumeMounts: 
+            - name:  config 
+              mountPath: /usr/share/nginx/html/index.html 
+              subPath: index.html
+        volumes: 
+        - name: config 
+          configMap: 
+            name: "{{ ansible_operator_meta.name }}"

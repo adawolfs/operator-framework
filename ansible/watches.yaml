@@ -1,0 +1,7 @@
+---
+# Use the 'create api' subcommand to add watches to this file.
+- version: v1
+  group: hora.de.k8s.adawolfs.github.io
+  kind: Speaker
+  role: speaker
+# +kubebuilder:scaffold:watch
