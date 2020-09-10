@@ -14,6 +14,8 @@ The speaker crd was created using the following command
 operator-sdk create api --group hora.de.k8s --version v1 --kind Session --resource=true --controller=true
 ```
 
+Build and push operator image
+
 ```
 make docker-build docker-push IMG=adawolfs/speaker-operator:go
 ```
