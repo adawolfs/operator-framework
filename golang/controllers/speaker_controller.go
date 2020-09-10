@@ -17,8 +17,9 @@ limitations under the License.
 package controllers
 
 import (
+	"bytes"
 	"context"
-	"fmt"
+	"text/template"
 
 	"github.com/go-logr/logr"
 	corev1 "k8s.io/api/core/v1"
@@ -97,17 +98,17 @@ func (r *SpeakerReconciler) Reconcile(req ctrl.Request) (ctrl.Result, error) {
 	return ctrl.Result{}, nil
 }
 
-// type ConfigmapSetup struct {
-// 	FirstName string
-// 	LastName  string
-// 	Avatar    string
-// }
+type ConfigmapSetup struct {
+	FirstName string
+	LastName  string
+	Avatar    string
+}
 
 func (r *SpeakerReconciler) deployConfigmap(s *horadek8sv1.Speaker) *corev1.ConfigMap {
 	avatar := s.Spec.Avatar
 	firstName := s.Spec.FirstName
 	lastName := s.Spec.LastName
-	// cm_setup := {firstName, lastName, avatar}
+	cm_setup := ConfigmapSetup{firstName, lastName, avatar}
 
 	indexTemplate := `
 			<html>
@@ -115,15 +116,22 @@ func (r *SpeakerReconciler) deployConfigmap(s *horadek8sv1.Speaker) *corev1.Conf
 				<body>
 					<div style="align-content: center;text-align: center;">
 						<h1>Golang</h1>
-						<img src="%s" alt="avatar" style="border-radius: 50%;">
-						<h1>%s %s</h1>
+						<img src="{{ .Avatar}}" alt="avatar" style="border-radius: 50%;">
+						<h1>{{ .FirstName}} {{ .LastName}}</h1>
 					</div>
 				</body>
 
 			</html>
 			`
+	t, err := template.New("index").Parse(indexTemplate)
 
-	indexContent := fmt.Sprintf(indexTemplate, avatar, firstName, lastName)
+	buf := &bytes.Buffer{}
+	err = t.Execute(buf, cm_setup)
+	if err != nil {
+		panic(err)
+	}
+
+	// indexContent := fmt.Sprintf(indexTemplate, avatar, firstName, lastName)
 
 	cm := &corev1.ConfigMap{
 		ObjectMeta: metav1.ObjectMeta{
@@ -131,7 +139,7 @@ func (r *SpeakerReconciler) deployConfigmap(s *horadek8sv1.Speaker) *corev1.Conf
 			Namespace: s.Namespace,
 		},
 		Data: map[string]string{
-			"index.html": indexContent,
+			"index.html": buf.String(),
 		},
 	}
 	return cm
