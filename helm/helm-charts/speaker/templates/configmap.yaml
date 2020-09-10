@@ -10,8 +10,9 @@ data:
     <head></head>
       <body>
         <div style="align-content: center;text-align: center;">
+          <h1>Helm</h1>
           <img src="{{ .Values.avatar }}" alt="avatar" style="border-radius: 50%;">
-          <h1>"{{ .Values.firstName }} {{ .Values.lastName }}"</h1>
+          <h1>{{ .Values.firstName }} {{ .Values.lastName }}</h1>
         </div>
       </body>
     </html>
