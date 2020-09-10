@@ -1,0 +1,1 @@
+This chart is an example for the helm operator framework

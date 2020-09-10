@@ -1,0 +1,20 @@
+apiVersion: v1 
+kind: Pod 
+metadata: 
+  name: {{ include "speaker.fullname" . }} 
+  labels:
+    {{- include "speaker.labels" . | nindent 4 }}
+spec: 
+  containers: 
+  - name: nginx 
+    image: nginx 
+    ports: 
+      - containerPort: 80 
+    volumeMounts: 
+      - name:  config 
+        mountPath: /usr/share/nginx/html/index.html 
+        subPath: index.html
+  volumes: 
+  - name: config 
+    configMap: 
+      name: {{ include "speaker.fullname" . }}

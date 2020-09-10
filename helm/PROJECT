@@ -1,4 +1,8 @@
-domain: my.domain
+domain: adawolfs.github.io
 layout: helm.sdk.operatorframework.io/v1
 projectName: helm
+resources:
+- group: hora.de.k8s
+  kind: Speaker
+  version: v1
 version: 3-alpha

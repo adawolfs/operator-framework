@@ -1,0 +1,17 @@
+apiVersion: v1  
+kind: ConfigMap 
+metadata: 
+  name: {{ include "speaker.fullname" . }} 
+  labels:
+    {{- include "speaker.labels" . | nindent 4 }}
+data: 
+  index.html: |
+    <html>
+    <head></head>
+      <body>
+        <div style="align-content: center;text-align: center;">
+          <img src="{{ .Values.avatar }}" alt="avatar" style="border-radius: 50%;">
+          <h1>"{{ .Values.firstName }} {{ .Values.lastName }}"</h1>
+        </div>
+      </body>
+    </html>

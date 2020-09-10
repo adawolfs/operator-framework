@@ -1,0 +1,4 @@
+## Append samples you want in your CSV to this file as resources ##
+resources:
+- hora.de.k8s_v1_speaker.yaml
+# +kubebuilder:scaffold:manifestskustomizesamples

@@ -1,0 +1,14 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: {{ include "speaker.fullname" . }} 
+  labels:
+    {{- include "speaker.labels" . | nindent 4 }}
+spec:
+  selector:
+    {{- include "speaker.labels" . | nindent 4 }}
+  type:  ClusterIP
+  ports:
+  - name:  http
+    port:  {{ .Values.service.port }}
+    targetPort:  {{ .Values.service.port }}

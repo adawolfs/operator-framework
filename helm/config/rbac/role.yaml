@@ -28,4 +28,34 @@ rules:
   verbs:
   - create
 
+##
+## Rules for hora.de.k8s.adawolfs.github.io/v1, Kind: Speaker
+##
+- apiGroups:
+  - hora.de.k8s.adawolfs.github.io
+  resources:
+  - speakers
+  - speakers/status
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- verbs:
+  - "*"
+  apiGroups:
+  - ""
+  resources:
+  - "serviceaccounts"
+  - "services"
+- verbs:
+  - "*"
+  apiGroups:
+  - "apps"
+  resources:
+  - "deployments"
+
 # +kubebuilder:scaffold:rules
